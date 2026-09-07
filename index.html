@@ -287,7 +287,7 @@
     /* ----- БЛОК МЕСТО ПРОВЕДЕНИЯ (растянут, фото увеличено) ----- */
     .venue-block {
       background: #a60401;
-      padding: 80px 30px 90px; /* увеличенный отступ */
+      padding: 80px 30px 90px;
       text-align: left;
       color: #ffffff;
     }
@@ -297,14 +297,14 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 50px; /* увеличен gap */
+      gap: 50px;
       max-width: 800px;
       margin: 0 auto;
     }
 
     .venue-block .venue-photo {
-      width: 220px;  /* увеличено */
-      height: 280px; /* увеличено */
+      width: 220px;
+      height: 280px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid #ffffff;
@@ -318,7 +318,7 @@
       gap: 10px;
       align-items: flex-start;
       text-align: left;
-      margin-left: 10px; /* дополнительное смещение вправо */
+      margin-left: 10px;
     }
 
     .venue-block .venue-name {
@@ -523,6 +523,10 @@
       gap: 20px;
       text-align: left;
     }
+    /* пояснительный текст под заголовком */
+    .guest-form .intro-text {
+      margin-bottom: 10px; /* отступ перед первым вопросом */
+    }
     .guest-form .form-group {
       display: flex;
       flex-direction: column;
@@ -609,12 +613,7 @@
       color: #ffffff;
       border: 2px solid #ffffff;
     }
-    .guest-form .confirm-text {
-      margin-top: 20px;
-      text-align: center;
-      font-style: italic;
-      opacity: 0.8;
-    }
+
     @media (max-width: 480px) {
       .guest-form-block { padding: 30px 20px 40px; }
     }
@@ -832,13 +831,16 @@
   <div class="guest-form-block">
     <div class="heading white fade-up">Анкета гостя</div>
     <form class="guest-form" id="guestForm">
-      <!-- Ваши имя и фамилия: -->
+      <!-- пояснительный текст после заголовка -->
+      <p class="body-text white intro-text fade-up">
+        Пожалуйста, подтвердите присутствие до 1 ноября.
+      </p>
+
       <div class="form-group fade-up">
         <label for="fullName" class="body-text white">Ваши имя и фамилия:</label>
         <input type="text" id="fullName" name="fullName" placeholder="Например, Анна Иванова" required />
       </div>
 
-      <!-- Будете ли вы присутствовать? (без двоеточия) -->
       <div class="form-group fade-up">
         <label class="body-text white">Будете ли вы присутствовать?</label>
         <div class="radio-group">
@@ -847,7 +849,6 @@
         </div>
       </div>
 
-      <!-- Выберите предпочитаемые напитки (можно несколько): -->
       <div class="form-group fade-up">
         <label class="body-text white">Выберите предпочитаемые напитки (можно несколько):</label>
         <div class="checkbox-group">
@@ -863,19 +864,12 @@
         </div>
       </div>
 
-      <!-- Аллергия или особые пожелания: -->
       <div class="form-group fade-up">
         <label for="allergies" class="body-text white">Аллергия или особые пожелания:</label>
         <textarea id="allergies" name="allergies" placeholder="Например, аллергия на орехи, вегетарианское меню…"></textarea>
       </div>
 
-      <!-- Кнопка -->
       <button type="submit" class="submit-btn fade-up">Отправить</button>
-
-      <!-- Фраза под анкетой -->
-      <div class="confirm-text body-text white fade-up">
-        Пожалуйста, подтвердите присутствие до 1 ноября.
-      </div>
     </form>
   </div>
 
