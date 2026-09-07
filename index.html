@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="format-detection" content="telephone=no" /> <!-- отключаем авто-ссылки для телефона -->
+  <meta name="format-detection" content="telephone=no" />
   <title>Приглашение</title>
   <style>
     @font-face {
@@ -284,10 +284,10 @@
       .invitation-text .heading { font-size: 1rem; }
     }
 
-    /* ----- БЛОК МЕСТО ПРОВЕДЕНИЯ (растянут вниз) ----- */
+    /* ----- БЛОК МЕСТО ПРОВЕДЕНИЯ (растянут, фото увеличено) ----- */
     .venue-block {
       background: #a60401;
-      padding: 70px 30px 80px;
+      padding: 80px 30px 90px; /* увеличенный отступ */
       text-align: left;
       color: #ffffff;
     }
@@ -297,14 +297,14 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 40px;
-      max-width: 750px;
+      gap: 50px; /* увеличен gap */
+      max-width: 800px;
       margin: 0 auto;
     }
 
     .venue-block .venue-photo {
-      width: 200px;
-      height: 260px;
+      width: 220px;  /* увеличено */
+      height: 280px; /* увеличено */
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid #ffffff;
@@ -318,6 +318,7 @@
       gap: 10px;
       align-items: flex-start;
       text-align: left;
+      margin-left: 10px; /* дополнительное смещение вправо */
     }
 
     .venue-block .venue-name {
@@ -349,21 +350,23 @@
     }
 
     @media (max-width: 700px) {
-      .venue-block { padding: 50px 20px 60px; }
-      .venue-block .venue-content { gap: 20px; justify-content: flex-start; }
-      .venue-block .venue-photo { width: 130px; height: 170px; }
+      .venue-block { padding: 60px 20px 70px; }
+      .venue-block .venue-content { gap: 30px; justify-content: flex-start; }
+      .venue-block .venue-photo { width: 150px; height: 190px; }
       .venue-block .venue-name { font-size: clamp(1rem, 2.5vw, 1.3rem); }
       .venue-block .venue-address { font-size: clamp(0.8rem, 1.8vw, 1rem); }
       .venue-block .venue-map-btn { font-size: 0.8rem; padding: 10px 20px; }
+      .venue-block .venue-details { margin-left: 0; }
     }
 
     @media (max-width: 450px) {
-      .venue-block { padding: 40px 15px 50px; }
-      .venue-block .venue-content { gap: 12px; }
-      .venue-block .venue-photo { width: 100px; height: 130px; }
+      .venue-block { padding: 50px 15px 60px; }
+      .venue-block .venue-content { gap: 15px; }
+      .venue-block .venue-photo { width: 110px; height: 140px; }
       .venue-block .venue-name { font-size: 0.9rem; }
       .venue-block .venue-address { font-size: 0.7rem; }
       .venue-block .venue-map-btn { font-size: 0.7rem; padding: 8px 16px; }
+      .venue-block .venue-details { margin-left: 0; }
     }
 
     /* ----- БЛОК ТАЙМИНГА (БЕЛЫЙ ФОН) ----- */
@@ -520,6 +523,11 @@
       gap: 20px;
       text-align: left;
     }
+    .guest-form .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
     .guest-form label {
       display: block;
       margin-bottom: 5px;
@@ -601,6 +609,12 @@
       color: #ffffff;
       border: 2px solid #ffffff;
     }
+    .guest-form .confirm-text {
+      margin-top: 20px;
+      text-align: center;
+      font-style: italic;
+      opacity: 0.8;
+    }
     @media (max-width: 480px) {
       .guest-form-block { padding: 30px 20px 40px; }
     }
@@ -616,7 +630,6 @@
       margin: 0 auto 20px;
       line-height: 1.6;
     }
-    /* Телефон – убираем синий цвет и подчёркивание */
     .contacts-block .contacts-phone {
       font-weight: 400;
       color: #2c2c2c !important;
@@ -624,13 +637,17 @@
       letter-spacing: 1px;
       font-size: clamp(1.4rem, 3vw, 2.2rem);
     }
-    /* дополнительный сброс для ссылок внутри телефона (на всякий случай) */
     .contacts-block .contacts-phone a,
     .contacts-block .contacts-phone a:visited,
     .contacts-block .contacts-phone a:hover,
     .contacts-block .contacts-phone a:active {
       color: #2c2c2c !important;
       text-decoration: none !important;
+    }
+    .contacts-block .contacts-organizer {
+      margin-top: 8px;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: #444444;
     }
 
     @media (max-width: 480px) {
@@ -649,7 +666,6 @@
       display: block;
       margin: 0 auto 20px;
     }
-    /* Уменьшили размер шрифта на ~4px */
     .final-block .final-text {
       font-family: 'UnboundedLight', sans-serif;
       font-weight: 300;
@@ -789,7 +805,7 @@
     </div>
   </div>
 
-  <!-- БЕЛЫЙ БЛОК: ТАЙМЕР (заголовок изменён) -->
+  <!-- БЕЛЫЙ БЛОК: ТАЙМЕР -->
   <div class="timer-block">
     <div class="heading fade-up">До нашей свадьбы:</div>
     <div class="timer-container" id="timer">
@@ -816,32 +832,50 @@
   <div class="guest-form-block">
     <div class="heading white fade-up">Анкета гостя</div>
     <form class="guest-form" id="guestForm">
-      <label for="fullName" class="body-text white">Ваши имя и фамилия</label>
-      <input type="text" id="fullName" name="fullName" placeholder="Например, Анна Иванова" required />
-
-      <label class="body-text white">Будете ли вы присутствовать?</label>
-      <div class="radio-group">
-        <label><input type="radio" name="attending" value="yes" required /> Да</label>
-        <label><input type="radio" name="attending" value="no" /> Нет</label>
+      <!-- Ваши имя и фамилия: -->
+      <div class="form-group fade-up">
+        <label for="fullName" class="body-text white">Ваши имя и фамилия:</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Например, Анна Иванова" required />
       </div>
 
-      <label class="body-text white">Выберите предпочитаемые напитки (можно несколько)</label>
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="alcohol" value="wine" /> Вино</label>
-        <label><input type="checkbox" name="alcohol" value="champagne" /> Шампанское</label>
-        <label><input type="checkbox" name="alcohol" value="strong" /> Крепкий алкоголь</label>
-        <label><input type="checkbox" name="alcohol" value="beer" /> Пиво</label>
-        <label><input type="checkbox" name="alcohol" value="cocktail" /> Коктейли</label>
-        <label><input type="checkbox" name="alcohol" value="juice" /> Сок</label>
-        <label><input type="checkbox" name="alcohol" value="water" /> Вода</label>
-        <label><input type="checkbox" name="alcohol" value="lemonade" /> Лимонад</label>
-        <label><input type="checkbox" name="alcohol" value="non-alcohol" /> Безалкогольное</label>
+      <!-- Будете ли вы присутствовать? (без двоеточия) -->
+      <div class="form-group fade-up">
+        <label class="body-text white">Будете ли вы присутствовать?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="attending" value="yes" required /> Да</label>
+          <label><input type="radio" name="attending" value="no" /> Нет</label>
+        </div>
       </div>
 
-      <label for="allergies" class="body-text white">Аллергия или особые пожелания</label>
-      <textarea id="allergies" name="allergies" placeholder="Например, аллергия на орехи, вегетарианское меню…"></textarea>
+      <!-- Выберите предпочитаемые напитки (можно несколько): -->
+      <div class="form-group fade-up">
+        <label class="body-text white">Выберите предпочитаемые напитки (можно несколько):</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="alcohol" value="wine" /> Вино</label>
+          <label><input type="checkbox" name="alcohol" value="champagne" /> Шампанское</label>
+          <label><input type="checkbox" name="alcohol" value="strong" /> Крепкий алкоголь</label>
+          <label><input type="checkbox" name="alcohol" value="beer" /> Пиво</label>
+          <label><input type="checkbox" name="alcohol" value="cocktail" /> Коктейли</label>
+          <label><input type="checkbox" name="alcohol" value="juice" /> Сок</label>
+          <label><input type="checkbox" name="alcohol" value="water" /> Вода</label>
+          <label><input type="checkbox" name="alcohol" value="lemonade" /> Лимонад</label>
+          <label><input type="checkbox" name="alcohol" value="non-alcohol" /> Безалкогольное</label>
+        </div>
+      </div>
 
-      <button type="submit" class="submit-btn">Отправить</button>
+      <!-- Аллергия или особые пожелания: -->
+      <div class="form-group fade-up">
+        <label for="allergies" class="body-text white">Аллергия или особые пожелания:</label>
+        <textarea id="allergies" name="allergies" placeholder="Например, аллергия на орехи, вегетарианское меню…"></textarea>
+      </div>
+
+      <!-- Кнопка -->
+      <button type="submit" class="submit-btn fade-up">Отправить</button>
+
+      <!-- Фраза под анкетой -->
+      <div class="confirm-text body-text white fade-up">
+        Пожалуйста, подтвердите присутствие до 1 ноября.
+      </div>
     </form>
   </div>
 
@@ -851,18 +885,18 @@
     <div class="contacts-text body-text fade-up">
       По всем вопросам просим вас обращаться к нашему организатору:
     </div>
-    <!-- телефон теперь не синий и без подчёркивания -->
     <div class="contacts-phone fade-up">+7 (999) 123-45-67</div>
+    <div class="contacts-organizer body-text fade-up">Александра — организатор</div>
   </div>
 
-  <!-- ФИНАЛЬНЫЙ БЛОК (размер шрифта уменьшен) -->
+  <!-- ФИНАЛЬНЫЙ БЛОК -->
   <div class="final-block">
     <img 
       src="e5af0bdb-786e-4919-ab4e-49f0fcb3cb4d_removalai_preview.png" 
       alt="Свадебное фото" 
       class="final-photo"
     />
-    <div class="final-text fade-up">С любовью, Владислав и Яна</div>
+    <div class="final-text fade-up">С любовью, Владислав и Яна!</div>
   </div>
 
   <script>
