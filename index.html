@@ -23,11 +23,11 @@
       font-family: 'UnboundedLight', sans-serif;
     }
 
-    /* ----- АНИМАЦИЯ ПОЯВЛЕНИЯ (для текстов и квадратиков) ----- */
+    /* ----- АНИМАЦИЯ ПОЯВЛЕНИЯ (только при полной видимости) ----- */
     .fade-up {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(25px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
     .fade-up.visible {
@@ -55,6 +55,21 @@
     .dresscode-color-item.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* ----- УНИВЕРСАЛЬНЫЙ ЗАГОЛОВОК (все секции) ----- */
+    .section-title {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #2c2c2c;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section-title.white {
+      color: #ffffff;
     }
 
     /* ----- ПЕРВЫЙ ЭКРАН (ВИДЕО) ----- */
@@ -132,7 +147,7 @@
       }
     }
 
-    /* ----- ВТОРОЙ БЛОК (БЕЛЫЙ ФОН) ----- */
+    /* ----- БЛОК ПРИГЛАШЕНИЯ (БЕЛЫЙ ФОН) ----- */
     .invitation-text {
       background: #ffffff;
       padding: 50px 30px 60px;
@@ -142,11 +157,11 @@
     .invitation-text h2 {
       font-family: 'UnboundedLight', sans-serif;
       font-weight: 300;
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(1.8rem, 4.5vw, 3.2rem);
       color: #2c2c2c;
       margin-bottom: 20px;
       letter-spacing: 1px;
-      white-space: nowrap;
+      white-space: nowrap; /* ОБЯЗАТЕЛЬНО ОДНА СТРОКА */
       max-width: 100%;
       overflow: visible;
     }
@@ -168,7 +183,7 @@
       line-height: 1.8;
     }
 
-    /* ----- КАЛЕНДАРНАЯ СТРОЧКА ----- */
+    /* ----- КАЛЕНДАРНАЯ СТРОЧКА (увеличенные отступы) ----- */
     .date-simple {
       margin: 40px auto 30px;
       text-align: center;
@@ -188,24 +203,25 @@
     .date-simple .weekdays {
       display: flex;
       justify-content: space-between;
-      font-size: clamp(0.7rem, 1.5vw, 1rem);
+      font-size: clamp(0.8rem, 1.8vw, 1.1rem);
       color: #888888;
       text-transform: uppercase;
       letter-spacing: 1px;
       padding: 0 8px;
-      gap: 12px;
+      gap: 16px; /* увеличен gap */
+      margin-bottom: 12px; /* дополнительный отступ между строками */
     }
 
     .date-simple .days {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: clamp(1rem, 2.5vw, 1.8rem);
+      font-size: clamp(1.2rem, 3vw, 2rem);
       color: #2c2c2c;
       font-weight: 300;
-      margin-top: 20px;
+      margin-top: 25px; /* увеличен отступ */
       padding: 0 8px;
-      gap: 12px;
+      gap: 16px; /* увеличен gap */
     }
 
     .date-simple .day-item {
@@ -241,8 +257,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: clamp(4rem, 9vw, 6.5rem);
-      height: clamp(4rem, 9vw, 6.5rem);
+      width: clamp(5.5rem, 12vw, 8rem); /* УВЕЛИЧЕНО */
+      height: clamp(5.5rem, 12vw, 8rem);
       pointer-events: none;
       object-fit: contain;
       z-index: 0;
@@ -253,22 +269,23 @@
         padding: 30px 15px 40px;
       }
       .invitation-text h2 {
-        font-size: clamp(1.4rem, 4.5vw, 2rem);
-        white-space: normal;
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+        white-space: nowrap; /* гарантия одной строки */
       }
       .invitation-text p {
         font-size: clamp(0.85rem, 4vw, 1.1rem);
         line-height: 1.6;
       }
       .date-simple .weekdays {
-        font-size: 0.6rem;
-        gap: 6px;
+        font-size: 0.65rem;
+        gap: 8px;
         letter-spacing: 0.5px;
+        margin-bottom: 8px;
       }
       .date-simple .days {
-        font-size: 0.9rem;
-        margin-top: 16px;
-        gap: 6px;
+        font-size: 1rem;
+        margin-top: 18px;
+        gap: 8px;
       }
       .date-simple .day-item {
         min-width: 28px;
@@ -277,8 +294,8 @@
         transform: translateY(4px);
       }
       .date-simple .day-item.highlight .day-image {
-        width: 2.8rem;
-        height: 2.8rem;
+        width: clamp(3rem, 10vw, 4rem);
+        height: clamp(3rem, 10vw, 4rem);
       }
       .month-title {
         font-size: 1.2rem;
@@ -289,12 +306,12 @@
     @media (max-width: 360px) {
       .date-simple .weekdays {
         font-size: 0.5rem;
-        gap: 4px;
+        gap: 5px;
       }
       .date-simple .days {
-        font-size: 0.75rem;
-        gap: 4px;
-        margin-top: 12px;
+        font-size: 0.8rem;
+        gap: 5px;
+        margin-top: 14px;
       }
       .date-simple .day-item {
         min-width: 22px;
@@ -303,30 +320,29 @@
         transform: translateY(3px);
       }
       .date-simple .day-item.highlight .day-image {
-        width: 2.2rem;
-        height: 2.2rem;
+        width: 2.5rem;
+        height: 2.5rem;
       }
       .month-title {
         font-size: 1rem;
         letter-spacing: 2px;
       }
+      .invitation-text h2 {
+        font-size: 1rem;
+      }
     }
 
-    /* ----- БЛОК МЕСТО ПРОВЕДЕНИЯ (всегда фото слева, текст справа) ----- */
+    /* ----- БЛОК МЕСТО ПРОВЕДЕНИЯ (растянут, фото овальное) ----- */
     .venue-block {
       background: #a60401;
-      padding: 50px 30px 60px;
+      padding: 60px 30px 70px; /* увеличенный вертикальный padding */
       text-align: left;
       color: #ffffff;
     }
 
     .venue-block .venue-title {
-      font-family: 'UnboundedLight', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      letter-spacing: 2px;
-      margin-bottom: 25px;
       text-align: center;
+      margin-bottom: 30px;
     }
 
     .venue-block .venue-content {
@@ -334,15 +350,15 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 30px;
-      max-width: 700px;
+      gap: 40px;
+      max-width: 750px;
       margin: 0 auto;
     }
 
     .venue-block .venue-photo {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
+      width: 200px;
+      height: 260px; /* делаем овал */
+      border-radius: 50%; /* даёт эллипс при разных ширине/высоте */
       object-fit: cover;
       border: 3px solid #ffffff;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
@@ -352,7 +368,7 @@
     .venue-block .venue-details {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       align-items: flex-start;
       text-align: left;
     }
@@ -360,15 +376,15 @@
     .venue-block .venue-name {
       font-family: 'UnboundedLight', sans-serif;
       font-weight: 300;
-      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
       letter-spacing: 1px;
     }
 
     .venue-block .venue-address {
       font-family: 'UnboundedLight', sans-serif;
       font-weight: 300;
-      font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-      opacity: 0.8;
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      opacity: 0.9;
     }
 
     .venue-block .venue-map-btn {
@@ -377,8 +393,8 @@
       color: #a60401;
       font-family: 'UnboundedLight', sans-serif;
       font-weight: 300;
-      font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-      padding: 10px 25px;
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      padding: 12px 30px;
       border-radius: 50px;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -393,54 +409,48 @@
       border-color: #ffffff;
     }
 
-    @media (max-width: 600px) {
+    /* адаптив для мобильных: уменьшаем размеры, но сохраняем горизонталь */
+    @media (max-width: 700px) {
       .venue-block {
-        padding: 30px 15px 40px;
-        text-align: center;
+        padding: 40px 20px 50px;
       }
       .venue-block .venue-content {
-        gap: 15px;
-        flex-wrap: nowrap;
+        gap: 20px;
         justify-content: flex-start;
-        align-items: center;
       }
       .venue-block .venue-photo {
-        width: 100px;
-        height: 100px;
-      }
-      .venue-block .venue-details {
-        align-items: flex-start;
-        text-align: left;
+        width: 130px;
+        height: 170px; /* овал сохраняется */
       }
       .venue-block .venue-name {
-        font-size: 1rem;
+        font-size: 1.1rem;
       }
       .venue-block .venue-address {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
       }
       .venue-block .venue-map-btn {
-        font-size: 0.8rem;
-        padding: 8px 18px;
+        font-size: 0.85rem;
+        padding: 10px 20px;
       }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 450px) {
       .venue-block .venue-content {
-        gap: 10px;
+        gap: 12px;
       }
       .venue-block .venue-photo {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 130px;
       }
       .venue-block .venue-name {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
       .venue-block .venue-address {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
       }
       .venue-block .venue-map-btn {
-        font-size: 0.7rem;
-        padding: 6px 14px;
+        font-size: 0.75rem;
+        padding: 8px 16px;
       }
     }
 
@@ -449,16 +459,6 @@
       background: #ffffff;
       padding: 50px 30px 60px;
       text-align: center;
-    }
-
-    .timing-block .timing-title {
-      font-family: 'UnboundedLight', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      color: #2c2c2c;
-      letter-spacing: 2px;
-      margin-bottom: 30px;
-      white-space: nowrap;
     }
 
     .timing-list {
@@ -523,14 +523,6 @@
       color: #ffffff;
     }
 
-    .dresscode-block .dresscode-title {
-      font-family: 'UnboundedLight', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      letter-spacing: 2px;
-      margin-bottom: 15px;
-    }
-
     .dresscode-block .dresscode-desc {
       font-family: 'UnboundedLight', sans-serif;
       font-weight: 300;
@@ -545,7 +537,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
       max-width: 500px;
       margin: 0 auto;
     }
@@ -581,6 +573,9 @@
         width: 60px;
         height: 60px;
       }
+      .dresscode-colors {
+        gap: 15px;
+      }
     }
 
     @media (max-width: 360px) {
@@ -595,16 +590,6 @@
       background: #ffffff;
       padding: 50px 30px 60px;
       text-align: center;
-    }
-
-    .timer-block .timer-title {
-      font-family: 'UnboundedLight', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      color: #2c2c2c;
-      letter-spacing: 2px;
-      margin-bottom: 30px;
-      white-space: nowrap;
     }
 
     .timer-container {
@@ -684,14 +669,6 @@
       padding: 50px 30px 60px;
       text-align: center;
       color: #ffffff;
-    }
-
-    .guest-form-block .form-title {
-      font-family: 'UnboundedLight', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      letter-spacing: 2px;
-      margin-bottom: 25px;
     }
 
     .guest-form {
@@ -814,15 +791,6 @@
       text-align: center;
     }
 
-    .contacts-block .contacts-title {
-      font-family: 'UnboundedLight', sans-serif;
-      font-weight: 300;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      color: #2c2c2c;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-    }
-
     .contacts-block .contacts-text {
       font-family: 'UnboundedLight', sans-serif;
       font-weight: 300;
@@ -943,7 +911,7 @@
 
   <!-- КРАСНЫЙ БЛОК: МЕСТО ПРОВЕДЕНИЯ -->
   <div class="venue-block">
-    <h3 class="venue-title fade-up">Место проведения</h3>
+    <div class="section-title white fade-up">Место проведения</div>
     <div class="venue-content fade-up">
       <img 
         src="ресторан.png" 
@@ -960,7 +928,7 @@
 
   <!-- БЕЛЫЙ БЛОК: ТАЙМИНГ -->
   <div class="timing-block">
-    <div class="timing-title fade-up">Программа дня</div>
+    <div class="section-title fade-up">Программа дня</div>
     <div class="timing-list">
       <div class="timing-item">
         <span class="timing-time">15:00</span>
@@ -991,7 +959,7 @@
 
   <!-- КРАСНЫЙ БЛОК: ДРЕСС-КОД -->
   <div class="dresscode-block">
-    <div class="dresscode-title fade-up">Дресс-код</div>
+    <div class="section-title white fade-up">Дресс-код</div>
     <div class="dresscode-desc fade-up">
       Поддержите цветовую гамму нашей свадьбы – коричневый, голубой, оранжевый
     </div>
@@ -1013,7 +981,7 @@
 
   <!-- БЕЛЫЙ БЛОК: ТАЙМЕР -->
   <div class="timer-block">
-    <div class="timer-title fade-up">До нашей свадьбы осталось</div>
+    <div class="section-title fade-up">До нашей свадьбы осталось</div>
     <div class="timer-container" id="timer">
       <div class="timer-item">
         <div class="timer-number" id="days">00</div>
@@ -1036,7 +1004,7 @@
 
   <!-- КРАСНЫЙ БЛОК: АНКЕТА ГОСТЯ -->
   <div class="guest-form-block">
-    <div class="form-title fade-up">Анкета гостя</div>
+    <div class="section-title white fade-up">Анкета гостя</div>
     <form class="guest-form" id="guestForm">
       <label for="fullName">Ваши имя и фамилия</label>
       <input type="text" id="fullName" name="fullName" placeholder="Например, Анна Иванова" required />
@@ -1052,6 +1020,11 @@
         <label><input type="checkbox" name="alcohol" value="wine" /> Вино</label>
         <label><input type="checkbox" name="alcohol" value="champagne" /> Шампанское</label>
         <label><input type="checkbox" name="alcohol" value="strong" /> Крепкий алкоголь</label>
+        <label><input type="checkbox" name="alcohol" value="beer" /> Пиво</label>
+        <label><input type="checkbox" name="alcohol" value="cocktail" /> Коктейли</label>
+        <label><input type="checkbox" name="alcohol" value="juice" /> Сок</label>
+        <label><input type="checkbox" name="alcohol" value="water" /> Вода</label>
+        <label><input type="checkbox" name="alcohol" value="lemonade" /> Лимонад</label>
         <label><input type="checkbox" name="alcohol" value="non-alcohol" /> Безалкогольное</label>
       </div>
 
@@ -1064,7 +1037,7 @@
 
   <!-- БЛОК КОНТАКТЫ -->
   <div class="contacts-block">
-    <div class="contacts-title fade-up">Контакты</div>
+    <div class="section-title fade-up">Контакты</div>
     <div class="contacts-text fade-up">
       По всем вопросам просим вас обращаться к нашему организатору:
     </div>
@@ -1082,7 +1055,7 @@
   </div>
 
   <script>
-    // Таймер обратного отсчёта до 01.12.2026 16:00
+    // Таймер
     const weddingDate = new Date('2026-12-01T16:00:00').getTime();
 
     function updateTimer() {
@@ -1116,7 +1089,7 @@
       alert('Спасибо! Ваша анкета отправлена.');
     });
 
-    // ----- INTERSECTION OBSERVER ДЛЯ АНИМАЦИИ ПОЯВЛЕНИЯ -----
+    // Intersection Observer – анимация при полной видимости
     document.addEventListener('DOMContentLoaded', function() {
       const elements = document.querySelectorAll('.fade-up, .dresscode-color-item');
       
@@ -1124,13 +1097,12 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            // после появления можно отключить наблюдение (опционально, чтобы не перезапускать)
             observer.unobserve(entry.target);
           }
         });
       }, {
-        threshold: 0.15, // когда 15% элемента видно
-        rootMargin: '0px 0px -50px 0px' // небольшой сдвиг для более раннего срабатывания (опционально)
+        threshold: 1.0, // элемент полностью виден
+        rootMargin: '0px 0px 0px 0px'
       });
 
       elements.forEach(el => observer.observe(el));
