@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Приглашение</title>
+  <style>
+    @font-face {
+      font-family: 'UnboundedLight';
+      src: url('Unbounded-Light.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background: #ffffff;
+      font-family: 'UnboundedLight', sans-serif;
+    }
+
+    /* ----- ПЕРВЫЙ ЭКРАН (ВИДЕО) ----- */
+    .video-wrapper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+
+    .video-wrapper video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+
+    .text-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #ffffff;
+      padding: 30px;
+      transform: translateY(32%);
+    }
+
+    .text-overlay h1 {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.4rem, 4vw, 2.8rem);
+      line-height: 1.4;
+      max-width: 900px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      letter-spacing: 1px;
+    }
+
+    .text-overlay .line {
+      display: block;
+    }
+    .text-overlay .line-1 { margin-bottom: 0.2em; }
+    .text-overlay .line-2 { margin-bottom: 0.2em; }
+    .text-overlay .line-3 { margin-bottom: 0.4em; }
+
+    .text-overlay .date {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+      letter-spacing: 4px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      margin-top: 10px;
+    }
+
+    @media (max-width: 480px) {
+      .text-overlay { transform: translateY(25%); }
+      .text-overlay h1 {
+        font-size: clamp(1.2rem, 7vw, 2rem);
+        line-height: 1.3;
+      }
+      .text-overlay .date {
+        font-size: clamp(1rem, 5vw, 1.6rem);
+        letter-spacing: 2px;
+      }
+    }
+
+    /* ----- ВТОРОЙ БЛОК (БЕЛЫЙ ФОН) ----- */
+    .invitation-text {
+      background: #ffffff;
+      padding: 50px 30px 60px;
+      text-align: center;
+    }
+
+    .invitation-text h2 {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #2c2c2c;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: visible;
+    }
+
+    .invitation-text .divider {
+      width: 80px;
+      height: 2px;
+      background: #d4c5b2;
+      margin: 20px auto 30px;
+    }
+
+    .invitation-text p {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 2.5vw, 1.8rem);
+      color: #444444;
+      max-width: 750px;
+      margin: 0 auto 20px;
+      line-height: 1.8;
+    }
+
+    /* ----- КАЛЕНДАРНАЯ СТРОЧКА ----- */
+    .date-simple {
+      margin: 40px auto 30px;
+      text-align: center;
+      font-family: 'UnboundedLight', sans-serif;
+      max-width: 700px;
+      padding: 0 10px;
+    }
+
+    .month-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 300;
+      color: #2c2c2c;
+      letter-spacing: 6px;
+      margin-bottom: 18px;
+    }
+
+    .date-simple .weekdays {
+      display: flex;
+      justify-content: space-between;
+      font-size: clamp(0.7rem, 1.5vw, 1rem);
+      color: #888888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0 8px;
+      gap: 12px;
+    }
+
+    .date-simple .days {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: clamp(1rem, 2.5vw, 1.8rem);
+      color: #2c2c2c;
+      font-weight: 300;
+      margin-top: 20px;
+      padding: 0 8px;
+      gap: 12px;
+    }
+
+    .date-simple .day-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 36px;
+      position: relative;
+    }
+
+    .date-simple .day-item .day-number {
+      font-size: inherit;
+      color: inherit;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      transform: translateY(6px);
+    }
+
+    .date-simple .day-item.grey .day-number {
+      color: #bbbbbb;
+    }
+
+    .date-simple .day-item.highlight {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .date-simple .day-item.highlight .day-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(4rem, 9vw, 6.5rem);
+      height: clamp(4rem, 9vw, 6.5rem);
+      pointer-events: none;
+      object-fit: contain;
+      z-index: 0;
+    }
+
+    @media (max-width: 480px) {
+      .invitation-text {
+        padding: 30px 15px 40px;
+      }
+      .invitation-text h2 {
+        font-size: clamp(1.4rem, 4.5vw, 2rem);
+        white-space: normal;
+      }
+      .invitation-text p {
+        font-size: clamp(0.85rem, 4vw, 1.1rem);
+        line-height: 1.6;
+      }
+      .date-simple .weekdays {
+        font-size: 0.6rem;
+        gap: 6px;
+        letter-spacing: 0.5px;
+      }
+      .date-simple .days {
+        font-size: 0.9rem;
+        margin-top: 16px;
+        gap: 6px;
+      }
+      .date-simple .day-item {
+        min-width: 28px;
+      }
+      .date-simple .day-item .day-number {
+        transform: translateY(4px);
+      }
+      .date-simple .day-item.highlight .day-image {
+        width: 2.8rem;
+        height: 2.8rem;
+      }
+      .month-title {
+        font-size: 1.2rem;
+        letter-spacing: 3px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .date-simple .weekdays {
+        font-size: 0.5rem;
+        gap: 4px;
+      }
+      .date-simple .days {
+        font-size: 0.75rem;
+        gap: 4px;
+        margin-top: 12px;
+      }
+      .date-simple .day-item {
+        min-width: 22px;
+      }
+      .date-simple .day-item .day-number {
+        transform: translateY(3px);
+      }
+      .date-simple .day-item.highlight .day-image {
+        width: 2.2rem;
+        height: 2.2rem;
+      }
+      .month-title {
+        font-size: 1rem;
+        letter-spacing: 2px;
+      }
+    }
+
+    /* ----- КРАСНЫЙ БЛОК: МЕСТО ПРОВЕДЕНИЯ ----- */
+    .venue-block {
+      background: #a60401;
+      padding: 50px 30px 60px;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .venue-block .venue-title {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+
+    .venue-block .venue-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .venue-block .venue-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffffff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .venue-block .venue-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .venue-block .venue-name {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      letter-spacing: 1px;
+    }
+
+    .venue-block .venue-address {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.9rem, 1.8vw, 1.4rem);
+      opacity: 0.8;
+    }
+
+    .venue-block .venue-map-btn {
+      display: inline-block;
+      background: #ffffff;
+      color: #a60401;
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      padding: 12px 35px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .venue-block .venue-map-btn:hover {
+      background: #a60401;
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    @media (min-width: 600px) {
+      .venue-block .venue-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 40px;
+        text-align: left;
+        max-width: 700px;
+      }
+      .venue-block .venue-details {
+        align-items: flex-start;
+      }
+      .venue-block .venue-photo {
+        width: 250px;
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .venue-block {
+        padding: 30px 20px 40px;
+      }
+      .venue-block .venue-title {
+        font-size: 1.8rem;
+      }
+      .venue-block .venue-photo {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .venue-block .venue-photo {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    /* ----- БЛОК ТАЙМИНГА (БЕЛЫЙ ФОН) ----- */
+    .timing-block {
+      background: #ffffff;
+      padding: 50px 30px 60px;
+      text-align: center;
+    }
+
+    .timing-block .timing-title {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: #2c2c2c;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+
+    .timing-list {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timing-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+    }
+
+    .timing-item:last-child {
+      border-bottom: none;
+    }
+
+    .timing-time {
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: #2c2c2c;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    .timing-event {
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: #555555;
+      text-align: right;
+    }
+
+    @media (max-width: 480px) {
+      .timing-block {
+        padding: 30px 20px 40px;
+      }
+      .timing-item {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        border-bottom: 1px solid #f0f0f0;
+        padding: 14px 0;
+      }
+      .timing-event {
+        text-align: center;
+      }
+      .timing-time {
+        font-weight: 400;
+      }
+    }
+
+    /* ----- БЛОК ДРЕСС-КОД (КРАСНЫЙ ФОН) ----- */
+    .dresscode-block {
+      background: #a60401;
+      padding: 50px 30px 60px;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .dresscode-block .dresscode-title {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .dresscode-block .dresscode-desc {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 2vw, 1.6rem);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+
+    .dresscode-colors {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .color-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .color-swatch {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .color-label {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+      color: #ffffff;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 480px) {
+      .dresscode-block {
+        padding: 30px 20px 40px;
+      }
+      .color-swatch {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .color-swatch {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    /* ----- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА (БЕЛЫЙ ФОН) ----- */
+    .timer-block {
+      background: #ffffff;
+      padding: 50px 30px 60px;
+      text-align: center;
+    }
+
+    .timer-block .timer-title {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: #2c2c2c;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+
+    .timer-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: nowrap;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .timer-item {
+      background: #f8f8f8;
+      border-radius: 16px;
+      padding: 15px 20px;
+      min-width: 80px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      flex: 1 1 0;
+    }
+
+    .timer-number {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 400;
+      color: #a60401;
+      line-height: 1;
+      font-family: 'UnboundedLight', sans-serif;
+    }
+
+    .timer-label {
+      font-size: clamp(0.6rem, 1.5vw, 1rem);
+      color: #888888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 5px;
+    }
+
+    @media (max-width: 480px) {
+      .timer-block {
+        padding: 30px 15px 40px;
+      }
+      .timer-container {
+        gap: 8px;
+      }
+      .timer-item {
+        padding: 10px 8px;
+        min-width: 50px;
+        border-radius: 12px;
+      }
+      .timer-number {
+        font-size: 1.4rem;
+      }
+      .timer-label {
+        font-size: 0.5rem;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .timer-container {
+        gap: 5px;
+      }
+      .timer-item {
+        padding: 8px 5px;
+        min-width: 40px;
+      }
+      .timer-number {
+        font-size: 1.2rem;
+      }
+      .timer-label {
+        font-size: 0.4rem;
+      }
+    }
+
+    /* ----- БЛОК АНКЕТА ГОСТЯ (КРАСНЫЙ ФОН) ----- */
+    .guest-form-block {
+      background: #a60401;
+      padding: 50px 30px 60px;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .guest-form-block .form-title {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+
+    .guest-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: left;
+    }
+
+    .guest-form label {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      opacity: 0.9;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .guest-form input[type="text"],
+    .guest-form input[type="email"],
+    .guest-form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      font-family: 'UnboundedLight', sans-serif;
+      font-size: 1rem;
+      background: #ffffff;
+      color: #333333;
+      outline: none;
+    }
+
+    .guest-form textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .guest-form .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 5px 0 10px;
+    }
+
+    .guest-form .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 300;
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    .guest-form .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: #a60401;
+      cursor: pointer;
+    }
+
+    .guest-form .radio-group {
+      display: flex;
+      gap: 20px;
+      margin: 5px 0 10px;
+    }
+
+    .guest-form .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 300;
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    .guest-form .radio-group input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #a60401;
+      cursor: pointer;
+    }
+
+    .guest-form .submit-btn {
+      background: #ffffff;
+      color: #a60401;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 30px;
+      font-family: 'UnboundedLight', sans-serif;
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      font-weight: 300;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      width: 100%;
+    }
+
+    .guest-form .submit-btn:hover {
+      background: #a60401;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+    }
+
+    @media (max-width: 480px) {
+      .guest-form-block {
+        padding: 30px 20px 40px;
+      }
+      .guest-form .radio-group {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    }
+
+    /* ----- БЛОК КОНТАКТЫ (БЕЛЫЙ ФОН) - только организатор ----- */
+    .contacts-block {
+      background: #ffffff;
+      padding: 50px 30px 60px;
+      text-align: center;
+    }
+
+    .contacts-block .contacts-title {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: #2c2c2c;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .contacts-block .contacts-text {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: #444444;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+
+    .contacts-block .contacts-phone {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 400;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      color: #2c2c2c;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 480px) {
+      .contacts-block {
+        padding: 30px 20px 40px;
+      }
+    }
+
+    /* ----- ФИНАЛЬНЫЙ БЛОК (С ЛЮБОВЬЮ И ФОТО) ----- */
+    .final-block {
+      background: #ffffff;
+      padding: 50px 30px 60px;
+      text-align: center;
+    }
+
+    .final-block .final-photo {
+      max-width: 200px;
+      height: auto;
+      /* убрали обводку, скругление, тени */
+      display: block;
+      margin: 0 auto 20px;
+    }
+
+    .final-block .final-text {
+      font-family: 'UnboundedLight', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      color: #2c2c2c;
+      letter-spacing: 1px;
+      white-space: nowrap; /* одна строка на всех устройствах */
+    }
+
+    @media (max-width: 480px) {
+      .final-block {
+        padding: 30px 20px 40px;
+      }
+      .final-block .final-photo {
+        max-width: 150px;
+      }
+      .final-block .final-text {
+        font-size: clamp(1.2rem, 5vw, 2rem);
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .final-block .final-text {
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ПЕРВЫЙ ЭКРАН: ВИДЕО -->
+  <div class="video-wrapper">
+    <video autoplay muted loop playsinline>
+      <source src="IMG_0230.MP4" type="video/mp4" />
+    </video>
+
+    <div class="text-overlay">
+      <h1>
+        <span class="line line-1">Вы приглашены</span>
+        <span class="line line-2">разделить с нами</span>
+        <span class="line line-3">самый важный день в нашей жизни!</span>
+      </h1>
+      <div class="date">01.12.2026</div>
+    </div>
+  </div>
+
+  <!-- ВТОРОЙ БЛОК: ТЕКСТ + КАЛЕНДАРЬ -->
+  <div class="invitation-text">
+    <h2>Дорогие родные и друзья!</h2>
+    <div class="divider"></div>
+    <p>
+      С огромной радостью и трепетом в сердце мы приглашаем вас разделить с нами самый важный день в нашей жизни — нашу свадьбу!
+    </p>
+
+    <div class="date-simple">
+      <div class="month-title">ДЕКАБРЬ</div>
+      <div class="weekdays">
+        <span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span>
+      </div>
+      <div class="days">
+        <span class="day-item grey"><span class="day-number">30</span></span>
+        <span class="day-item highlight">
+          <span class="day-number">1</span>
+          <img 
+            src="e5af0bdb-786e-4919-ab4e-49f0fcb3cb4d_removalai_preview.png" 
+            alt="декор" 
+            class="day-image"
+          />
+        </span>
+        <span class="day-item"><span class="day-number">2</span></span>
+        <span class="day-item"><span class="day-number">3</span></span>
+        <span class="day-item"><span class="day-number">4</span></span>
+        <span class="day-item"><span class="day-number">5</span></span>
+        <span class="day-item"><span class="day-number">6</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- КРАСНЫЙ БЛОК: МЕСТО ПРОВЕДЕНИЯ -->
+  <div class="venue-block">
+    <h3 class="venue-title">Место проведения</h3>
+    <div class="venue-content">
+      <img 
+        src="ресторан.png" 
+        alt="Ресторан" 
+        class="venue-photo"
+      />
+      <div class="venue-details">
+        <div class="venue-name">Ресторан «Уют»</div>
+        <div class="venue-address">г. Москва, ул. Праздничная, д. 10</div>
+        <a href="#" class="venue-map-btn">Показать на карте</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- БЕЛЫЙ БЛОК: ТАЙМИНГ -->
+  <div class="timing-block">
+    <div class="timing-title">Программа дня</div>
+    <div class="timing-list">
+      <div class="timing-item">
+        <span class="timing-time">15:00</span>
+        <span class="timing-event">Сбор гостей</span>
+      </div>
+      <div class="timing-item">
+        <span class="timing-time">16:00</span>
+        <span class="timing-event">Торжественная церемония</span>
+      </div>
+      <div class="timing-item">
+        <span class="timing-time">17:00</span>
+        <span class="timing-event">Фуршет</span>
+      </div>
+      <div class="timing-item">
+        <span class="timing-time">18:30</span>
+        <span class="timing-event">Банкет</span>
+      </div>
+      <div class="timing-item">
+        <span class="timing-time">20:00</span>
+        <span class="timing-event">Танцы и развлечения</span>
+      </div>
+      <div class="timing-item">
+        <span class="timing-time">22:00</span>
+        <span class="timing-event">Торт и поздравления</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- КРАСНЫЙ БЛОК: ДРЕСС-КОД -->
+  <div class="dresscode-block">
+    <div class="dresscode-title">Дресс-код</div>
+    <div class="dresscode-desc">
+      Поддержите цветовую гамму нашей свадьбы – коричневый, голубой, оранжевый
+    </div>
+    <div class="dresscode-colors">
+      <div class="color-item">
+        <div class="color-swatch" style="background-color: #8B5A2B;"></div>
+        <span class="color-label">Коричневый</span>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch" style="background-color: #87CEEB;"></div>
+        <span class="color-label">Голубой</span>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch" style="background-color: #FF8C00;"></div>
+        <span class="color-label">Оранжевый</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- БЕЛЫЙ БЛОК: ТАЙМЕР -->
+  <div class="timer-block">
+    <div class="timer-title">До нашей свадьбы осталось</div>
+    <div class="timer-container" id="timer">
+      <div class="timer-item">
+        <div class="timer-number" id="days">00</div>
+        <div class="timer-label">Дни</div>
+      </div>
+      <div class="timer-item">
+        <div class="timer-number" id="hours">00</div>
+        <div class="timer-label">Часы</div>
+      </div>
+      <div class="timer-item">
+        <div class="timer-number" id="minutes">00</div>
+        <div class="timer-label">Минуты</div>
+      </div>
+      <div class="timer-item">
+        <div class="timer-number" id="seconds">00</div>
+        <div class="timer-label">Секунды</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- КРАСНЫЙ БЛОК: АНКЕТА ГОСТЯ -->
+  <div class="guest-form-block">
+    <div class="form-title">Анкета гостя</div>
+    <form class="guest-form" id="guestForm">
+      <label for="fullName">Ваши имя и фамилия</label>
+      <input type="text" id="fullName" name="fullName" placeholder="Например, Анна Иванова" required />
+
+      <label>Будете ли вы присутствовать?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="attending" value="yes" required /> Да</label>
+        <label><input type="radio" name="attending" value="no" /> Нет</label>
+      </div>
+
+      <label>Выберите предпочитаемые напитки (можно несколько)</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="alcohol" value="wine" /> Вино</label>
+        <label><input type="checkbox" name="alcohol" value="champagne" /> Шампанское</label>
+        <label><input type="checkbox" name="alcohol" value="strong" /> Крепкий алкоголь</label>
+        <label><input type="checkbox" name="alcohol" value="non-alcohol" /> Безалкогольное</label>
+      </div>
+
+      <label for="allergies">Аллергия или особые пожелания</label>
+      <textarea id="allergies" name="allergies" placeholder="Например, аллергия на орехи, вегетарианское меню…"></textarea>
+
+      <button type="submit" class="submit-btn">Отправить</button>
+    </form>
+  </div>
+
+  <!-- БЛОК КОНТАКТЫ (только организатор) -->
+  <div class="contacts-block">
+    <div class="contacts-title">Контакты</div>
+    <div class="contacts-text">
+      По всем вопросам просим вас обращаться к нашему организатору:
+    </div>
+    <div class="contacts-phone">+7 (999) 123-45-67</div>
+  </div>
+
+  <!-- ФИНАЛЬНЫЙ БЛОК (С ЛЮБОВЬЮ И ФОТО, одна строка) -->
+  <div class="final-block">
+    <img 
+      src="e5af0bdb-786e-4919-ab4e-49f0fcb3cb4d_removalai_preview.png" 
+      alt="Свадебное фото" 
+      class="final-photo"
+    />
+    <div class="final-text">С любовью, Владислав и Яна</div>
+  </div>
+
+  <script>
+    // Таймер обратного отсчёта до 01.12.2026 16:00
+    const weddingDate = new Date('2026-12-01T16:00:00').getTime();
+
+    function updateTimer() {
+      const now = new Date().getTime();
+      const diff = weddingDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    document.getElementById('guestForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Спасибо! Ваша анкета отправлена.');
+    });
+  </script>
+
+</body>
+</html>
