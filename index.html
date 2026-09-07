@@ -24,7 +24,7 @@
       font-family: 'UnboundedLight', sans-serif;
     }
 
-    /* ----- АНИМАЦИЯ ПОЯВЛЕНИЯ (при полной видимости) ----- */
+    /* ----- АНИМАЦИЯ ПОЯВЛЕНИЯ ----- */
     .fade-up {
       opacity: 0;
       transform: translateY(25px);
@@ -87,7 +87,7 @@
       opacity: 0.9;
     }
 
-    /* ----- ПЕРВЫЙ ЭКРАН (ВИДЕО) – строго 100vh, три строки ----- */
+    /* ----- ПЕРВЫЙ ЭКРАН (ВИДЕО) ----- */
     .video-wrapper {
       position: relative;
       width: 100vw;
@@ -162,7 +162,7 @@
       }
     }
 
-    /* ----- БЛОК ПРИГЛАШЕНИЯ (БЕЛЫЙ ФОН) ----- */
+    /* ----- БЛОК ПРИГЛАШЕНИЯ ----- */
     .invitation-text {
       background: #ffffff;
       padding: 50px 30px 60px;
@@ -284,7 +284,7 @@
       .invitation-text .heading { font-size: 1rem; }
     }
 
-    /* ----- БЛОК МЕСТО ПРОВЕДЕНИЯ (растянут, фото увеличено) ----- */
+    /* ----- БЛОК МЕСТО ПРОВЕДЕНИЯ ----- */
     .venue-block {
       background: #a60401;
       padding: 80px 30px 90px;
@@ -369,7 +369,7 @@
       .venue-block .venue-details { margin-left: 0; }
     }
 
-    /* ----- БЛОК ТАЙМИНГА (БЕЛЫЙ ФОН) ----- */
+    /* ----- БЛОК ТАЙМИНГА ----- */
     .timing-block {
       background: #ffffff;
       padding: 50px 30px 60px;
@@ -407,7 +407,7 @@
       .timing-time { font-weight: 400; }
     }
 
-    /* ----- БЛОК ДРЕСС-КОД (КРАСНЫЙ ФОН) ----- */
+    /* ----- БЛОК ДРЕСС-КОД ----- */
     .dresscode-block {
       background: #a60401;
       padding: 50px 30px 60px;
@@ -457,7 +457,7 @@
       .color-swatch { width: 50px; height: 50px; }
     }
 
-    /* ----- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА (БЕЛЫЙ ФОН) ----- */
+    /* ----- ТАЙМЕР ----- */
     .timer-block {
       background: #ffffff;
       padding: 50px 30px 60px;
@@ -508,7 +508,7 @@
       .timer-label { font-size: 0.4rem; }
     }
 
-    /* ----- БЛОК АНКЕТА ГОСТЯ (КРАСНЫЙ ФОН) ----- */
+    /* ----- БЛОК АНКЕТА ГОСТЯ ----- */
     .guest-form-block {
       background: #a60401;
       padding: 50px 30px 60px;
@@ -523,10 +523,15 @@
       gap: 20px;
       text-align: left;
     }
-    /* пояснительный текст под заголовком */
+
+    /* текст-пояснение – одна строка по центру */
     .guest-form .intro-text {
-      margin-bottom: 10px; /* отступ перед первым вопросом */
+      text-align: center;
+      white-space: nowrap;
+      font-size: clamp(0.75rem, 1.6vw, 1.2rem);
+      margin-bottom: 10px;
     }
+
     .guest-form .form-group {
       display: flex;
       flex-direction: column;
@@ -616,9 +621,12 @@
 
     @media (max-width: 480px) {
       .guest-form-block { padding: 30px 20px 40px; }
+      .guest-form .intro-text {
+        font-size: 0.7rem; /* дополнительное уменьшение на малых экранах */
+      }
     }
 
-    /* ----- БЛОК КОНТАКТЫ (БЕЛЫЙ ФОН) ----- */
+    /* ----- БЛОК КОНТАКТЫ ----- */
     .contacts-block {
       background: #ffffff;
       padding: 50px 30px 60px;
@@ -653,7 +661,7 @@
       .contacts-block { padding: 30px 20px 40px; }
     }
 
-    /* ----- ФИНАЛЬНЫЙ БЛОК (С ЛЮБОВЬЮ И ФОТО) ----- */
+    /* ----- ФИНАЛЬНЫЙ БЛОК ----- */
     .final-block {
       background: #ffffff;
       padding: 50px 30px 60px;
@@ -686,7 +694,7 @@
 </head>
 <body>
 
-  <!-- ПЕРВЫЙ ЭКРАН: ВИДЕО (100vh, 3 строки) -->
+  <!-- ПЕРВЫЙ ЭКРАН: ВИДЕО -->
   <div class="video-wrapper">
     <video autoplay muted loop playsinline>
       <source src="IMG_0230.MP4" type="video/mp4" />
@@ -831,7 +839,7 @@
   <div class="guest-form-block">
     <div class="heading white fade-up">Анкета гостя</div>
     <form class="guest-form" id="guestForm">
-      <!-- пояснительный текст после заголовка -->
+      <!-- ТЕКСТ ПОЯСНЕНИЯ – ОДНА СТРОКА ПО ЦЕНТРУ -->
       <p class="body-text white intro-text fade-up">
         Пожалуйста, подтвердите присутствие до 1 ноября.
       </p>
@@ -928,7 +936,7 @@
       alert('Спасибо! Ваша анкета отправлена.');
     });
 
-    // Intersection Observer – анимация при полной видимости
+    // Intersection Observer
     document.addEventListener('DOMContentLoaded', function() {
       const elements = document.querySelectorAll('.fade-up, .dresscode-color-item');
       
